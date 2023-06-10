@@ -1,0 +1,26 @@
+<h2>Create Claim</h2>
+
+<form class="form-container" (ngSubmit)="submitForm()" #claimForm="ngForm">
+    <div>
+        <label for="policyNumber">Policy Number:</label>
+        <input type="text" id="policyNumber" name="policyNumber" [(ngModel)]="claim.policy_no" required>
+    </div>
+
+    <div>
+        <label for="estimatedAmount">Estimated Amount:</label>
+        <input type="number" id="estimatedAmount" name="estimatedAmount" [(ngModel)]="claim.estimated_loss" required>
+        <div *ngIf="isAmountInvalid()" class="error-message">
+            Estimated Amount must be a positive number.
+        </div>
+    </div>
+
+    <div>
+        <label for="dateOfAccident">Date of Accident:</label>
+        <input type="date" id="dateOfAccident" name="dateOfAccident" [(ngModel)]="claim.date_of_accident" required>
+        <div *ngIf="isDateInvalid()" class="error-message">
+            Date of Accident cannot be in the future.
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="!claimForm.valid || isDateInvalid() || isAmountInvalid()">Submit</button>
+</form>
