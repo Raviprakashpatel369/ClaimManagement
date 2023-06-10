@@ -1,0 +1,42 @@
+<h2>Update Claim</h2>
+
+<table class="claim-list-table claim-list-container">
+  <tr>
+    <td><strong>Claim ID:</strong></td>
+    <td>{{ claim.claimId }}</td>
+  </tr>
+  <tr>
+    <td><strong>Policy Number:</strong></td>
+    <td>{{ claim.policy_no }}</td>
+  </tr>
+  <tr>
+    <td><strong>Estimated Amount:</strong></td>
+    <td>{{ claim.estimated_loss }}</td>
+  </tr>
+  <tr>
+    <td><strong>Approved Amount:</strong></td>
+    <td>{{ claim.amount_approved_by_surveyor }}</td>
+  </tr>
+  <tr>
+    <td><strong>Date of Accident:</strong></td>
+    <td>{{ claim.date_of_accident | date: 'dd-MM-yyyy' }}</td>
+  </tr>
+  <tr>
+    <td><strong>Claim Status:</strong></td>
+    <td>{{ claim.claim_status ? 'Active' : 'Inactive'}}</td>
+  </tr>
+  <tr>
+    <td><strong>Approval:</strong></td>
+    <td>{{ claim.insurance_company_approval ? 'Approved' : 'Pending'}}</td>
+  </tr>
+  <tr>
+    <td><strong>Claim Amount:</strong></td>
+    <td>{{ claim.withdraw_claim ? 'Done' : 'Not Done'}}</td>
+  </tr>
+</table>
+
+<div *ngIf="claim && !claim.status">
+  <button (click)="acceptClaimAmount()" [disabled]="!claim.insurance_company_approval">Accept Claim Amount</button>
+  <button (click)="withdrawClaim()" [disabled]="!claim.claim_status">Withdraw Claim</button>
+  <button (click)="close()">< Back</button>
+</div>

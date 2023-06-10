@@ -1,0 +1,27 @@
+<h2>All Claims</h2>
+
+<table class="claim-list-table">
+    <tr>
+        <th>Claim ID</th>
+        <th>Policy Number</th>
+        <th>Estimated Amount</th>
+        <th>Date of Accident</th>
+        <th>Claim Status</th>
+        <th>Approval</th>
+        <th>Claim Amount</th>
+        <th>Actions</th>
+    </tr>
+    <tr *ngFor="let claim of claims">
+        <td>{{ claim.claimId }}</td>
+        <td>{{ claim.policy_no }}</td>
+        <td>{{ claim.estimated_loss }}</td>
+        <td>{{ claim.date_of_accident | date: 'dd-MM-yyyy' }}</td>
+        <td>{{ claim.claim_status ? 'Active' : 'Inactive'}}</td>
+        <td>{{ claim.insurance_company_approval ? 'Approved' : 'Pending'}}</td>
+        <td>{{ claim.withdraw_claim ? 'Done' : 'Not Done'}}</td>
+
+        <td>
+            <button (click)="redirectToUpdateClaim(claim.claimId)">Update Claim</button>
+        </td>
+    </tr>
+</table>
